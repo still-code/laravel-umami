@@ -7,8 +7,10 @@ use Illuminate\Support\Facades\Http;
 class Umami
 {
     /**
-     * authenticate the user with stats server
+     * authenticate the user with stats server.
+     *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Session\SessionManager|\Illuminate\Session\Store|mixed|void
+     *
      * @throws \Illuminate\Http\Client\RequestException
      */
     public static function auth()
@@ -16,8 +18,7 @@ class Umami
         abort_if(
             config('umami.url') === null ||
             config('umami.username') === null ||
-            config('umami.password') === null
-            , 421, 'please make sur to set all umami config');
+            config('umami.password') === null, 421, 'please make sur to set all umami config');
 
         if (session()->has('umami_token')) {
             return session('umami_token');
@@ -38,6 +39,7 @@ class Umami
      * @param $part string available parts: stats, pageviews, events, metrics. defualt:
      * @param $options array available options: start_at, end_at, unit, tz, type
      * @return array|mixed
+     *
      * @throws \Illuminate\Http\Client\RequestException
      */
     public static function stats($siteID, $part = 'stats', $options = null)
@@ -58,7 +60,8 @@ class Umami
     }
 
     /**
-     * set the defaults options for the $part
+     * set the defaults options for the $part.
+     *
      * @param $part
      * @param $options
      * @return array
@@ -75,7 +78,7 @@ class Umami
                 'tz' => config('app.timezone'),
             ],
             'metrics' => [
-                'type' => 'url'
+                'type' => 'url',
             ],
         ];
 
@@ -97,7 +100,8 @@ class Umami
     }
 
     /**
-     * set the Carbon dates and convert them to milliseconds
+     * set the Carbon dates and convert them to milliseconds.
+     *
      * @param $data
      * @return int|null
      */
