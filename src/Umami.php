@@ -60,6 +60,26 @@ class Umami
     }
 
     /**
+     * get all available websites
+     * @return array|mixed
+     * @throws \Illuminate\Http\Client\RequestException
+     */
+    public static function websites()
+    {
+        self::auth();
+
+        $response = Http
+            ::withHeaders([
+                'Cookie' => 'umami.auth='.session('umami_token'),
+            ])
+            ->get(config('umami.url').'/websites');
+
+        $response->throw();
+
+        return $response->json();
+    }
+
+    /**
      * set the defaults options for the $part.
      *
      * @param $part
@@ -69,6 +89,7 @@ class Umami
     public static function setOptions($part, $options)
     {
         $defaultOptions = [
+            'websites' => [],
             'stats' => [],
             'pageviews' => [
                 'unit' => 'day',

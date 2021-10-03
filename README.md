@@ -38,12 +38,18 @@ UMAMI_PASSWORD="password"
 
 ## Usage
 
+###Get Stats
 ```php
 $stats = \Umami\Umami::stats(2,'metrics',[
         'start_at'=>today()->subDays(7),
         'end_at'=>today(),
         'type'=>'referrer',
     ]);
+```
+###Get All websites
+
+```php
+$sites = \Umami\Umami::websites();
 ```
 
 ## Parameters
