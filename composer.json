@@ -1,6 +1,6 @@
 {
     "name": "atm-code/laravel-umami",
-    "description": "API wrapper for umami website analytics. get your stats in the laravel app",
+    "description": "Umami API wrapper for laravel",
     "keywords": [
         "laravel",
         "umami",

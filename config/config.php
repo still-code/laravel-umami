@@ -4,7 +4,7 @@ return [
     /**
      * the server URL with the /api
      */
-    'url' => env('UMAMI_URL', 'https://DOMAIN.COM/api'),
+    'url' => env('UMAMI_URL', null),
 
     /**
      * the username for your umami server
