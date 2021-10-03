@@ -1,0 +1,57 @@
+{
+    "name": "atm-code/laravel-umami",
+    "description": "API wrapper for umami website analytics. get your stats in the laravel app",
+    "keywords": [
+        "laravel",
+        "umami",
+        "stats",
+        "analytics",
+        "website",
+        "api"
+    ],
+    "homepage": "https://github.com/atm-code/laravel-umami",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Ashraf Monshi",
+            "email": "wh7r.com@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.3|^8.0",
+        "illuminate/support": "^8.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.17",
+        "phpunit/phpunit": "^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Umami\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Umami\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Umami\\UmamiServiceProvider"
+            ],
+            "aliases": {
+                "Umami": "Umami\\UmamiFacade"
+            }
+        }
+    }
+}
