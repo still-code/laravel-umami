@@ -125,6 +125,10 @@ $stats = \Umami\Umami::stats(siteID,'metrics',[
 ]);
 ```
 
+## More details
+
+Please checkout [Umami website](https://umami.is/) for more information.
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
@@ -132,10 +136,6 @@ Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recen
 ## Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
-
-### Security
-
-If you discover any security related issues, please email wh7r.com@gmail.com instead of using the issue tracker.
 
 ## Credits
 
