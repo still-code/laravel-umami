@@ -60,8 +60,10 @@ class Umami
     }
 
     /**
-     * get all available websites
+     * get all available websites.
+     *
      * @return array|mixed
+     *
      * @throws \Illuminate\Http\Client\RequestException
      */
     public static function websites()
