@@ -3,7 +3,7 @@
 <p align="center">
 <a href="https://packagist.org/packages/atm-code/laravel-umami"><img src="https://img.shields.io/packagist/v/atm-code/laravel-umami" /></a>
 <a href="https://travis-ci.com/atm-code/laravel-umami"><img src="https://img.shields.io/travis/com/atm-code/laravel-umami" /></a>
-<a href="https://github.styleci.io/repos/354853609?branch=main"><img src="https://github.styleci.io/repos/413043529/shield?branch=main" /></a>
+<a href="https://github.styleci.io/repos/413043529?branch=main"><img src="https://github.styleci.io/repos/413043529/shield?branch=main" /></a>
 <a href="https://packagist.org/packages/atm-code/laravel-umami"><img src="https://img.shields.io/packagist/dt/atm-code/laravel-umami" /></a>
 <a href="https://github.com/atm-code/laravel-umami"><img src="https://img.shields.io/github/stars/atm-code/laravel-umami" /></a>
 </p>
