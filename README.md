@@ -139,7 +139,7 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ## Credits
 
-- [Ashraf Monshi](https://github.com/atm-code)
+- [Mike Cao](https://github.com/mikecao)
 - [All Contributors](../../contributors)
 
 ## License
