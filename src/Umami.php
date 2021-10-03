@@ -69,6 +69,7 @@ class Umami
     public static function setOptions($part, $options)
     {
         $defaultOptions = [
+            'stats' => [],
             'pageviews' => [
                 'unit' => 'day',
                 'tz' => config('app.timezone'),
