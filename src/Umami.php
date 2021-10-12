@@ -25,7 +25,7 @@ class Umami
             return session('umami_token');
         }
 
-        $response = Http::post(config('umami.url') . '/auth/login', [
+        $response = Http::post(config('umami.url').'/auth/login', [
             'username' => config('umami.username'),
             'password' => config('umami.password'),
         ]);
@@ -49,26 +49,27 @@ class Umami
     {
         self::auth();
 
-        $options  = self::setOptions($part, $options);
+        $options = self::setOptions($part, $options);
         $response = Http
             ::withHeaders([
-                'Cookie' => 'umami.auth=' . session('umami_token'),
+                'Cookie' => 'umami.auth='.session('umami_token'),
             ])
-            ->get(config('umami.url') . '/website/' . $siteID . '/' . $part, $options);
+            ->get(config('umami.url').'/website/'.$siteID.'/'.$part, $options);
 
         $response->throw();
 
         if ($force) {
-            cache()->forget(config('umami.cache_key') . '.' . $siteID . '.' . $part);
+            cache()->forget(config('umami.cache_key').'.'.$siteID.'.'.$part);
         }
 
-        return cache()->remember(config('umami.cache_key') . '.' . $siteID . '.' . $part, config('umami.cache_ttl'), function () use ($response) {
+        return cache()->remember(config('umami.cache_key').'.'.$siteID.'.'.$part, config('umami.cache_ttl'), function () use ($response) {
             return $response->json();
         });
     }
 
     /**
      * get all available websites.
+     *
      * @param $force boolean force getting the result from the server, and clear the cache
      * @return mixed
      *
@@ -81,17 +82,17 @@ class Umami
 
         $response = Http
             ::withHeaders([
-                'Cookie' => 'umami.auth=' . session('umami_token'),
+                'Cookie' => 'umami.auth='.session('umami_token'),
             ])
-            ->get(config('umami.url') . '/websites');
+            ->get(config('umami.url').'/websites');
 
         $response->throw();
 
         if ($force) {
-            cache()->forget(config('umami.cache_key') . '.websites');
+            cache()->forget(config('umami.cache_key').'.websites');
         }
 
-        return cache()->remember(config('umami.cache_key') . '.websites', config('umami.cache_ttl'), function () use ($response) {
+        return cache()->remember(config('umami.cache_key').'.websites', config('umami.cache_ttl'), function () use ($response) {
             return $response->json();
         });
     }
@@ -103,7 +104,7 @@ class Umami
      * @param $options
      * @return array
      */
-    private static function setOptions($part, $options) : array
+    private static function setOptions($part, $options): array
     {
         $defaultOptions = [
             'websites'  => [],
@@ -140,6 +141,7 @@ class Umami
 
     /**
      * set the Carbon dates and convert them to milliseconds.
+     *
      * @param $data
      * @return string|null
      */
