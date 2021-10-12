@@ -45,7 +45,7 @@ class Umami
      * @throws RequestException
      * @throws \Exception
      */
-    public static function query(int $siteID, string $part = 'stats', array $options = null, bool $force = false) : mixed
+    public static function query(int $siteID, string $part = 'stats', array $options = null, bool $force = false)
     {
         self::auth();
 
@@ -75,7 +75,7 @@ class Umami
      * @throws RequestException
      * @throws \Exception
      */
-    public static function websites(bool $force = false) : mixed
+    public static function websites(bool $force = false)
     {
         self::auth();
 
@@ -143,7 +143,7 @@ class Umami
      * @param $data
      * @return string|null
      */
-    private static function setDate($data) : string|null
+    private static function setDate($data)
     {
         if (is_numeric($data)) {
             return $data;
