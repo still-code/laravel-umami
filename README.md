@@ -10,7 +10,7 @@
 
 # Umami API wrapper for laravel
 
-API wrapper for umami website analytics. get your stats in the laravel app.
+API wrapper for umami website analytics. get your statistics in the laravel app.
 
 check out [Umami](https://umami.is/) own your website analytics
 
@@ -38,13 +38,18 @@ UMAMI_PASSWORD="password"
 
 ## Usage
 
-### Get Stats
+### Query Stats
 ```php
-$stats = \Umami\Umami::stats(2,'metrics',[
+$stats = \Umami\Umami::query(2,'metrics',[
         'start_at'=>today()->subDays(7),
         'end_at'=>today(),
         'type'=>'referrer',
     ]);
+```
+
+#### short usage for `PHP 8` to get default stats for the last 7 days and without cache:
+```php
+$stats = \Umami\Umami::query(siteID: 1, force: false)
 ```
 ### Get All websites
 
@@ -59,7 +64,7 @@ $sites = \Umami\Umami::websites();
 required: site id from umami server
 
 ```php
-$stats = \Umami\Umami::stats(siteID);
+$stats = \Umami\Umami::query(siteID);
 ```
 
 ### Part
@@ -71,7 +76,7 @@ available options : `stats, pageviews, events, metrics`
 default: `stats`
 
 ```php
-$stats = \Umami\Umami::stats(siteID,'pageviews');
+$stats = \Umami\Umami::query(siteID,'pageviews');
 ```
 
 ## Options
@@ -85,7 +90,7 @@ default: last 7 days
 you can pass `carbon` object or timestamp in milliseconds
 
 ```php
-$stats = \Umami\Umami::stats(siteID,'metrics',[
+$stats = \Umami\Umami::query(siteID,'metrics',[
     'start_at'=>today()->subDays(7),
     'end_at'=>today(),
 ]);
@@ -99,7 +104,7 @@ optional: Time unit, available options: `year, month, hour, day`,
 default: day
 
 ```php
-$stats = \Umami\Umami::stats(siteID,'metrics',[
+$stats = \Umami\Umami::query(siteID,'metrics',[
     'unit'=>'year',
 ]);
 ```
@@ -112,7 +117,7 @@ only available on `pageviews` and `events`
 default: config('app.timezone')
 
 ```php
-$stats = \Umami\Umami::stats(siteID,'metrics',[
+$stats = \Umami\Umami::query(siteID,'metrics',[
     'tz'=>'America/Los_Angeles',
 ]);
 ```
@@ -126,7 +131,7 @@ available options: `url, referrer, browser, os, device, country, event`,
 default: url
 
 ```php
-$stats = \Umami\Umami::stats(siteID,'metrics',[
+$stats = \Umami\Umami::query(siteID,'metrics',[
     'tz'=>'America/Los_Angeles',
 ]);
 ```

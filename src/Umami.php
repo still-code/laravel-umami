@@ -2,16 +2,17 @@
 
 namespace Umami;
 
+use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 
 class Umami
 {
     /**
-     * authenticate the user with stats server.
+     * authenticate the user with umami stats' server.
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Session\SessionManager|\Illuminate\Session\Store|mixed|void
      *
-     * @throws \Illuminate\Http\Client\RequestException
+     * @throws RequestException
      */
     public static function auth()
     {
@@ -24,7 +25,7 @@ class Umami
             return session('umami_token');
         }
 
-        $response = Http::post(config('umami.url').'/auth/login', [
+        $response = Http::post(config('umami.url') . '/auth/login', [
             'username' => config('umami.username'),
             'password' => config('umami.password'),
         ]);
@@ -37,48 +38,62 @@ class Umami
     /**
      * @param $siteID int require site id
      * @param $part string available parts: stats, pageviews, events, metrics. defualt:
-     * @param $options array available options: start_at, end_at, unit, tz, type
-     * @return array|mixed
+     * @param $options array|null available options: start_at, end_at, unit, tz, type
+     * @param $force boolean force getting the result from the server, and clear the cache
+     * @return mixed
      *
-     * @throws \Illuminate\Http\Client\RequestException
+     * @throws RequestException
+     * @throws \Exception
      */
-    public static function stats($siteID, $part = 'stats', $options = null)
+    public static function query(int $siteID, string $part = 'stats', array $options = null, bool $force = false) : mixed
     {
         self::auth();
 
-        $options = self::setOptions($part, $options);
-
+        $options  = self::setOptions($part, $options);
         $response = Http
             ::withHeaders([
-                'Cookie' => 'umami.auth='.session('umami_token'),
+                'Cookie' => 'umami.auth=' . session('umami_token'),
             ])
-            ->get(config('umami.url').'/website/'.$siteID.'/'.$part, $options);
+            ->get(config('umami.url') . '/website/' . $siteID . '/' . $part, $options);
 
         $response->throw();
 
-        return $response->json();
+        if ($force) {
+            cache()->forget(config('umami.cache_key') . '.' . $siteID . '.' . $part);
+        }
+
+        return cache()->remember(config('umami.cache_key') . '.' . $siteID . '.' . $part, config('umami.cache_ttl'), function () use ($response) {
+            return $response->json();
+        });
     }
 
     /**
      * get all available websites.
+     * @param $force boolean force getting the result from the server, and clear the cache
+     * @return mixed
      *
-     * @return array|mixed
-     *
-     * @throws \Illuminate\Http\Client\RequestException
+     * @throws RequestException
+     * @throws \Exception
      */
-    public static function websites()
+    public static function websites(bool $force = false) : mixed
     {
         self::auth();
 
         $response = Http
             ::withHeaders([
-                'Cookie' => 'umami.auth='.session('umami_token'),
+                'Cookie' => 'umami.auth=' . session('umami_token'),
             ])
-            ->get(config('umami.url').'/websites');
+            ->get(config('umami.url') . '/websites');
 
         $response->throw();
 
-        return $response->json();
+        if ($force) {
+            cache()->forget(config('umami.cache_key') . '.websites');
+        }
+
+        return cache()->remember(config('umami.cache_key') . '.websites', config('umami.cache_ttl'), function () use ($response) {
+            return $response->json();
+        });
     }
 
     /**
@@ -88,27 +103,27 @@ class Umami
      * @param $options
      * @return array
      */
-    public static function setOptions($part, $options)
+    private static function setOptions($part, $options) : array
     {
         $defaultOptions = [
-            'websites' => [],
-            'stats' => [],
+            'websites'  => [],
+            'stats'     => [],
             'pageviews' => [
                 'unit' => 'day',
-                'tz' => config('app.timezone'),
+                'tz'   => config('app.timezone'),
             ],
-            'events' => [
+            'events'    => [
                 'unit' => 'day',
-                'tz' => config('app.timezone'),
+                'tz'   => config('app.timezone'),
             ],
-            'metrics' => [
+            'metrics'   => [
                 'type' => 'url',
             ],
         ];
 
         $datesOptions = [
             'start_at' => now()->subDays(7)->getTimestampMs(),
-            'end_at' => now()->getTimestampMs(),
+            'end_at'   => now()->getTimestampMs(),
         ];
 
         if ($options === null) {
@@ -117,7 +132,7 @@ class Umami
 
         $datesOptions = [
             'start_at' => self::setDate($options['start_at']),
-            'end_at' => self::setDate($options['end_at']),
+            'end_at'   => self::setDate($options['end_at']),
         ];
 
         return array_merge($defaultOptions[$part], array_merge($options, $datesOptions));
@@ -125,11 +140,10 @@ class Umami
 
     /**
      * set the Carbon dates and convert them to milliseconds.
-     *
      * @param $data
-     * @return int|null
+     * @return string|null
      */
-    public static function setDate($data)
+    private static function setDate($data) : string|null
     {
         if (is_numeric($data)) {
             return $data;
