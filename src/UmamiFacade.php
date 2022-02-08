@@ -16,6 +16,6 @@ class UmamiFacade extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'umami';
+        return Umami::class;
     }
 }
