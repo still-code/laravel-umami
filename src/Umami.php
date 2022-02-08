@@ -50,8 +50,7 @@ class Umami
         self::auth();
 
         $options = self::setOptions($part, $options);
-        $response = Http
-            ::withHeaders([
+        $response = Http::withHeaders([
                 'Cookie' => 'umami.auth='.session('umami_token'),
             ])
             ->get(config('umami.url').'/website/'.$siteID.'/'.$part, $options);
@@ -80,8 +79,7 @@ class Umami
     {
         self::auth();
 
-        $response = Http
-            ::withHeaders([
+        $response = Http::withHeaders([
                 'Cookie' => 'umami.auth='.session('umami_token'),
             ])
             ->get(config('umami.url').'/websites');
