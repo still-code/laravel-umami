@@ -25,6 +25,7 @@
     },
     "require-dev": {
         "orchestra/testbench": "^7.0",
+        "phpstan/phpstan": "^1.5",
         "phpunit/phpunit": "^9.5.10"
     },
     "autoload": {
