@@ -50,8 +50,7 @@ class Umami
         self::auth();
 
         $options = self::setOptions($part, $options);
-        $response = Http
-            ::withToken(session('umami_token'))
+        $response = Http::withToken(session('umami_token'))
             ->get(config('umami.url').'/website/'.$siteID.'/'.$part, $options);
 
         $response->throw();
@@ -78,8 +77,7 @@ class Umami
     {
         self::auth();
 
-        $response = Http
-            ::withToken(session('umami_token'))
+        $response = Http::withToken(session('umami_token'))
             ->get(config('umami.url').'/websites');
 
         $response->throw();
