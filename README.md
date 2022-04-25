@@ -2,10 +2,10 @@
 
 <p align="center">
 <a href="https://packagist.org/packages/atm-code/laravel-umami"><img src="https://img.shields.io/packagist/v/atm-code/laravel-umami" /></a>
-<a href="https://app.travis-ci.com/atm-code/laravel-umami"><img src="https://app.travis-ci.com/atm-code/laravel-umami.svg?branch=main" /></a>
 <a href="https://github.styleci.io/repos/413043529?branch=main"><img src="https://github.styleci.io/repos/413043529/shield?branch=main" /></a>
 <a href="https://packagist.org/packages/atm-code/laravel-umami"><img src="https://img.shields.io/packagist/dt/atm-code/laravel-umami" /></a>
 <a href="https://github.com/atm-code/laravel-umami"><img src="https://img.shields.io/github/stars/atm-code/laravel-umami" /></a>
+<a href="https://www.codefactor.io/repository/github/atm-code/laravel-umami"><img src="https://www.codefactor.io/repository/github/atm-code/laravel-umami/badge" alt="CodeFactor" /></a>
 </p>
 
 # Umami API wrapper for laravel
