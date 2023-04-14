@@ -1,5 +1,5 @@
 {
-    "name": "atm-code/laravel-umami",
+    "name": "still-code/laravel-umami",
     "description": "Umami API wrapper for laravel",
     "keywords": [
         "laravel",
@@ -9,7 +9,7 @@
         "website",
         "api"
     ],
-    "homepage": "https://github.com/atm-code/laravel-umami",
+    "homepage": "https://github.com/still-code/laravel-umami",
     "license": "MIT",
     "type": "library",
     "authors": [

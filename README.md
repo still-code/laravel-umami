@@ -1,11 +1,11 @@
-<p align="center"><img src="https://banners.beyondco.de/Laravel%20Umami.png?theme=light&packageManager=composer+require&packageName=atm-code%2Flaravel-umami&pattern=temple&style=style_1&description=Umami+API+wrapper+for+Laravel&md=0&showWatermark=1&fontSize=100px&images=https%3A%2F%2Flaravel.com%2Fimg%2Flogomark.min.svg" width="600"></p>
+<p align="center"><img src="https://banners.beyondco.de/Laravel%20Umami.png?theme=light&packageManager=composer+require&packageName=still-code%2Flaravel-umami&pattern=temple&style=style_1&description=Umami+API+wrapper+for+Laravel&md=0&showWatermark=1&fontSize=100px&images=https%3A%2F%2Flaravel.com%2Fimg%2Flogomark.min.svg" width="600"></p>
 
 <p align="center">
-<a href="https://packagist.org/packages/atm-code/laravel-umami"><img src="https://img.shields.io/packagist/v/atm-code/laravel-umami" /></a>
+<a href="https://packagist.org/packages/still-code/laravel-umami"><img src="https://img.shields.io/packagist/v/still-code/laravel-umami" /></a>
 <a href="https://github.styleci.io/repos/413043529?branch=main"><img src="https://github.styleci.io/repos/413043529/shield?branch=main" /></a>
-<a href="https://packagist.org/packages/atm-code/laravel-umami"><img src="https://img.shields.io/packagist/dt/atm-code/laravel-umami" /></a>
-<a href="https://github.com/atm-code/laravel-umami"><img src="https://img.shields.io/github/stars/atm-code/laravel-umami" /></a>
-<a href="https://www.codefactor.io/repository/github/atm-code/laravel-umami"><img src="https://www.codefactor.io/repository/github/atm-code/laravel-umami/badge" alt="CodeFactor" /></a>
+<a href="https://packagist.org/packages/still-code/laravel-umami"><img src="https://img.shields.io/packagist/dt/still-code/laravel-umami" /></a>
+<a href="https://github.com/still-code/laravel-umami"><img src="https://img.shields.io/github/stars/still-code/laravel-umami" /></a>
+<a href="https://www.codefactor.io/repository/github/still-code/laravel-umami"><img src="https://www.codefactor.io/repository/github/still-code/laravel-umami/badge" alt="CodeFactor" /></a>
 </p>
 
 # Umami API wrapper for laravel
@@ -19,7 +19,7 @@ check out [Umami](https://umami.is/) own your website analytics
 You can install the package via composer:
 
 ```bash
-composer require atm-code/laravel-umami
+composer require still-code/laravel-umami
 ```
 ### Config
 to publish the configuration file:
