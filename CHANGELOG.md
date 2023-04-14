@@ -6,10 +6,10 @@ All notable changes to `Laravel-umami` will be documented in this file
 
 ## What's Changed
 
-- update auth to Bearer by @atmonshi in https://github.com/atm-code/laravel-umami/pull/5
-- Apply fixes from StyleCI by @atmonshi in https://github.com/atm-code/laravel-umami/pull/6
+- update auth to Bearer by @atmonshi in https://github.com/still-code/laravel-umami/pull/5
+- Apply fixes from StyleCI by @atmonshi in https://github.com/still-code/laravel-umami/pull/6
 
-**Full Changelog**: https://github.com/atm-code/laravel-umami/compare/2.0.0...3.0.0
+**Full Changelog**: https://github.com/still-code/laravel-umami/compare/2.0.0...3.0.0
 
 ## 1.2 - 2021-10-12
 
