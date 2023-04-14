@@ -36,7 +36,7 @@ class Umami
     }
 
     /**
-     * @param $siteID int require site id
+     * @param $siteID string require site id
      * @param $part string available parts: stats, pageviews, events, metrics. defualt:
      * @param $options array|null available options: start_at, end_at, unit, tz, type
      * @param $force boolean force getting the result from the server, and clear the cache
@@ -45,13 +45,13 @@ class Umami
      * @throws RequestException
      * @throws \Exception
      */
-    public static function query(int $siteID, string $part = 'stats', array $options = null, bool $force = false)
+    public static function query(string $siteID, string $part = 'stats', array $options = null, bool $force = false)
     {
         self::auth();
 
         $options = self::setOptions($part, $options);
         $response = Http::withToken(session('umami_token'))
-            ->get(config('umami.url').'/website/'.$siteID.'/'.$part, $options);
+            ->get(config('umami.url').'/websites/'.$siteID.'/'.$part, $options);
 
         $response->throw();
 
