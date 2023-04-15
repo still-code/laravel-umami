@@ -39,7 +39,7 @@ class Umami
      * @param $siteID string require site id
      * @param $part string available parts: stats, pageviews, events, metrics. defualt:
      * @param $options array|null available options: start_at, end_at, unit, tz, type
-     * @param $force boolean force getting the result from the server, and clear the cache
+     * @param $force bool force getting the result from the server, and clear the cache
      * @return mixed
      *
      * @throws RequestException
@@ -93,32 +93,28 @@ class Umami
 
     /**
      * set the defaults options for the $part.
-     *
-     * @param $part
-     * @param $options
-     * @return array
      */
     private static function setOptions($part, $options): array
     {
         $defaultOptions = [
-            'websites'  => [],
-            'stats'     => [],
+            'websites' => [],
+            'stats' => [],
             'pageviews' => [
                 'unit' => 'day',
-                'tz'   => config('app.timezone'),
+                'tz' => config('app.timezone'),
             ],
-            'events'    => [
+            'events' => [
                 'unit' => 'day',
-                'tz'   => config('app.timezone'),
+                'tz' => config('app.timezone'),
             ],
-            'metrics'   => [
+            'metrics' => [
                 'type' => 'url',
             ],
         ];
 
         $datesOptions = [
             'start_at' => now()->subDays(7)->getTimestampMs(),
-            'end_at'   => now()->getTimestampMs(),
+            'end_at' => now()->getTimestampMs(),
         ];
 
         if ($options === null) {
@@ -127,7 +123,7 @@ class Umami
 
         $datesOptions = [
             'start_at' => self::setDate($options['start_at']),
-            'end_at'   => self::setDate($options['end_at']),
+            'end_at' => self::setDate($options['end_at']),
         ];
 
         return array_merge($defaultOptions[$part], array_merge($options, $datesOptions));
@@ -136,7 +132,6 @@ class Umami
     /**
      * set the Carbon dates and convert them to milliseconds.
      *
-     * @param $data
      * @return string|null
      */
     private static function setDate($data)

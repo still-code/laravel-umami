@@ -1,11 +1,11 @@
-<p align="center"><img src="https://banners.beyondco.de/Laravel%20Umami.png?theme=light&packageManager=composer+require&packageName=still-code%2Flaravel-umami&pattern=temple&style=style_1&description=Umami+API+wrapper+for+Laravel&md=0&showWatermark=1&fontSize=100px&images=https%3A%2F%2Flaravel.com%2Fimg%2Flogomark.min.svg" width="600"></p>
+<p align="center"><img src="https://banners.beyondco.de/Laravel%20Umami.png?theme=light&packageManager=composer+require&packageName=still-code%2Flaravel-umami&pattern=brickWall&style=style_1&description=Umami+API+wrapper+for+laravel&md=1&showWatermark=1&fontSize=125px&images=chart-bar" width="600"></p>
 
 <p align="center">
 <a href="https://packagist.org/packages/still-code/laravel-umami"><img src="https://img.shields.io/packagist/v/still-code/laravel-umami" /></a>
-<a href="https://github.styleci.io/repos/413043529?branch=main"><img src="https://github.styleci.io/repos/413043529/shield?branch=main" /></a>
 <a href="https://packagist.org/packages/still-code/laravel-umami"><img src="https://img.shields.io/packagist/dt/still-code/laravel-umami" /></a>
 <a href="https://github.com/still-code/laravel-umami"><img src="https://img.shields.io/github/stars/still-code/laravel-umami" /></a>
-<a href="https://www.codefactor.io/repository/github/still-code/laravel-umami"><img src="https://www.codefactor.io/repository/github/still-code/laravel-umami/badge" alt="CodeFactor" /></a>
+<a href="https://github.com/still-code/laravel-umami/actions?query=workflow%3Arun-tests+branch%3Amain"><img src="https://img.shields.io/github/actions/workflow/status/still-code/laravel-umami/run-tests.yml?branch=main&label=tests&style=flat-square" /></a>
+<a href="https://github.com/still-code/laravel-umami/actions?query=workflow%3AFix+PHP+code+style+issues+branch%3Amain"><img src="https://img.shields.io/github/actions/workflow/status/still-code/laravel-umami/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square" /></a>
 </p>
 
 # Umami API wrapper for laravel
