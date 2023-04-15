@@ -6,6 +6,7 @@
 <a href="https://github.com/still-code/laravel-umami"><img src="https://img.shields.io/github/stars/still-code/laravel-umami" /></a>
 <a href="https://github.com/still-code/laravel-umami/actions?query=workflow%3Arun-tests+branch%3Amain"><img src="https://img.shields.io/github/actions/workflow/status/still-code/laravel-umami/run-tests.yml?branch=main&label=tests&style=flat-square" /></a>
 <a href="https://github.com/still-code/laravel-umami/actions?query=workflow%3AFix+PHP+code+style+issues+branch%3Amain"><img src="https://img.shields.io/github/actions/workflow/status/still-code/laravel-umami/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square" /></a>
+<a href="https://github.com/still-code/laravel-umami/actions/workflows/fix-php-code-style-issues.yml"><img src="https://github.com/still-code/laravel-umami/actions/workflows/fix-php-code-style-issues.yml/badge.svg" /></a>
 </p>
 
 # Umami API wrapper for laravel
