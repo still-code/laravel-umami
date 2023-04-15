@@ -2,6 +2,14 @@
 
 All notable changes to `Laravel-umami` will be documented in this file
 
+## 4.1.1 - 2023-04-15
+
+### What's Changed
+
+- updates by @atmonshi in https://github.com/still-code/laravel-umami/pull/11
+
+**Full Changelog**: https://github.com/still-code/laravel-umami/compare/4.1.0...4.1.1
+
 ## 4.1.0 - 2023-04-14
 
 ### What's Changed
