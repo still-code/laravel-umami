@@ -15,6 +15,12 @@ API wrapper for umami website analytics. get your statistics in the laravel app.
 
 check out [Umami](https://umami.is/) own your website analytics
 
+## Features
+
+- Manage websites
+- Manage accounts
+- query statistics stats, page views, events and metrics
+
 ## Installation
 
 You can install the package via composer:
@@ -41,34 +47,31 @@ UMAMI_PASSWORD="password"
 
 ### Query Stats
 ```php
-$stats = \Umami\Umami::query(2,'metrics',[
+\Umami\Umami::query(2,'metrics',[
         'start_at'=>today()->subDays(7),
         'end_at'=>today(),
         'type'=>'referrer',
     ]);
 ```
 
-#### short usage for `PHP 8` to get default stats for the last 7 days and without cache:
-```php
-$stats = \Umami\Umami::query(siteID: 1, force: false)
-```
-### Get All websites
+<br>
 
+short usage for `PHP 8` to get default stats for the last 7 days and without cache:
 ```php
-$sites = \Umami\Umami::websites();
+\Umami\Umami::query(siteID: 1, force: true)
 ```
 
-## Parameters
+### Parameters
 
-### Site id
+#### Site id
 
 required: site id from umami server
 
 ```php
-$stats = \Umami\Umami::query(siteID);
+\Umami\Umami::query(siteID);
 ```
 
-### Part
+#### Part
 
 required: the stats part you want to get from umami,
 
@@ -77,12 +80,12 @@ available options : `stats, pageviews, events, metrics`
 default: `stats`
 
 ```php
-$stats = \Umami\Umami::query(siteID,'pageviews');
+\Umami\Umami::query(siteID,'pageviews');
 ```
 
-## Options
+### Options for Query Stats
 
-### Dates (start_at,end_at)
+#### Dates (start_at,end_at)
 
 optional: Timestamp of starting and end date,
 
@@ -91,13 +94,13 @@ default: last 7 days
 you can pass `carbon` object or timestamp in milliseconds
 
 ```php
-$stats = \Umami\Umami::query(siteID,'metrics',[
+\Umami\Umami::query(siteID,'metrics',[
     'start_at'=>today()->subDays(7),
     'end_at'=>today(),
 ]);
 ```
 
-### unit
+##### unit
 only available on `pageviews` and `events`
 
 optional: Time unit, available options: `year, month, hour, day`,
@@ -105,12 +108,12 @@ optional: Time unit, available options: `year, month, hour, day`,
 default: day
 
 ```php
-$stats = \Umami\Umami::query(siteID,'metrics',[
+\Umami\Umami::query(siteID,'metrics',[
     'unit'=>'year',
 ]);
 ```
 
-### Timezone (tz)
+##### Timezone (tz)
 optional: Timezone,
 
 only available on `pageviews` and `events`
@@ -118,12 +121,12 @@ only available on `pageviews` and `events`
 default: config('app.timezone')
 
 ```php
-$stats = \Umami\Umami::query(siteID,'metrics',[
+\Umami\Umami::query(siteID,'metrics',[
     'tz'=>'America/Los_Angeles',
 ]);
 ```
 
-### type (for metrics only)
+##### type (for metrics only)
 
 optional: Gets metrics for a given time range,
 
@@ -132,14 +135,77 @@ available options: `url, referrer, browser, os, device, country, event`,
 default: url
 
 ```php
-$stats = \Umami\Umami::query(siteID,'metrics',[
+\Umami\Umami::query(siteID,'metrics',[
     'tz'=>'America/Los_Angeles',
 ]);
 ```
 
+## Websites
+
+### Get All websites
+
+```php
+\Umami\Umami::websites();
+```
+
+### Create a website
+
+```php
+\Umami\Umami::createWebsite([
+    'domain'=>'domain.ltd',
+    'name'=>'account name',
+    'userId'=>'3', // account id
+]);
+```
+
+### Update a website
+
+```php
+\Umami\Umami::websites('d131d2ae-5d21-4a54-80ba-16719afedf7b',[
+    'domain'=>'domain.ltd',
+    'name'=>'account name',
+    'userId'=>'3', // account id
+]);
+```
+
+### Delete a website
+
+```php
+\Umami\Umami::deleteWebsite('d131d2ae-5d21-4a54-80ba-16719afedf7b');
+```
+
+## Accounts
+
+### Get All accounts
+
+```php
+\Umami\Umami::accounts();
+```
+
+### Create an account
+
+```php
+\Umami\Umami::createAccount('username','password');
+```
+
+### Update an account
+
+```php
+\Umami\Umami::updateAccount(1,[
+    'username'=>'username',
+    'password'=>'password',
+]);
+```
+
+### Delete an account
+
+```php
+\Umami\Umami::deleteAccounts(2);
+```
+
 ## More details
 
-Please checkout [Umami website](https://umami.is/) for more information.
+Please check out [Umami website](https://umami.is/) for more information.
 
 ## Changelog
 
