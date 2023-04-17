@@ -2,6 +2,16 @@
 
 All notable changes to `Laravel-umami` will be documented in this file
 
+## 4.2.0 - 2023-04-17
+
+### What's Changed
+
+- Updates by @atmonshi in https://github.com/still-code/laravel-umami/pull/12
+- small code refactor by @atmonshi in https://github.com/still-code/laravel-umami/pull/13
+- allow to create, update, and delete sites throw umami API by @atmonshi in https://github.com/still-code/laravel-umami/pull/14
+
+**Full Changelog**: https://github.com/still-code/laravel-umami/compare/4.1.1...4.2.0
+
 ## 4.1.1 - 2023-04-15
 
 ### What's Changed
