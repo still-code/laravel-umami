@@ -20,15 +20,15 @@ trait Websites
         self::auth();
 
         $response = Http::withToken(session('umami_token'))
-            ->get(config('umami.url') . '/websites');
+            ->get(config('umami.url').'/websites');
 
         $response->throw();
 
         if ($force) {
-            cache()->forget(config('umami.cache_key') . '.websites');
+            cache()->forget(config('umami.cache_key').'.websites');
         }
 
-        return cache()->remember(config('umami.cache_key') . '.websites', config('umami.cache_ttl'), function () use ($response) {
+        return cache()->remember(config('umami.cache_key').'.websites', config('umami.cache_ttl'), function () use ($response) {
             return $response->json();
         });
     }
