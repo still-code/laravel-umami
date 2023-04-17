@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Http;
 class Umami
 {
     use Websites;
+    use Accounts;
 
     /**
      * authenticate the user with umami stats' server.
