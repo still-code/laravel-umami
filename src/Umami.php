@@ -17,7 +17,7 @@ class Umami
      *
      * @throws RequestException
      */
-    public function __construct()
+    public static function auth()
     {
         abort_if(
             config('umami.url') === null ||
@@ -45,6 +45,8 @@ class Umami
      */
     public static function query(string $siteID, string $part = 'stats', array $options = null, bool $force = false): mixed
     {
+        self::auth();
+
         $options = self::setOptions($part, $options);
         $response = Http::withToken(session('umami_token'))
             ->get(config('umami.url').'/websites/'.$siteID.'/'.$part, $options);
