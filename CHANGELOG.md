@@ -2,6 +2,14 @@
 
 All notable changes to `Laravel-umami` will be documented in this file
 
+## 4.2.2 - 2023-04-17
+
+### What's Changed
+
+- fix auth by @atmonshi in https://github.com/still-code/laravel-umami/pull/16
+
+**Full Changelog**: https://github.com/still-code/laravel-umami/compare/4.2.1...4.2.2
+
 ## 4.2.1 - 2023-04-17
 
 ### What's Changed
