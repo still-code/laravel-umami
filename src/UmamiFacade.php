@@ -5,7 +5,7 @@ namespace Umami;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \Umami\Skeleton\SkeletonClass
+ * @see \Umami\UmamiFacade
  */
 class UmamiFacade extends Facade
 {
