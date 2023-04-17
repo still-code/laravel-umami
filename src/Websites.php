@@ -17,6 +17,8 @@ trait Websites
      */
     public static function websites(bool $force = false): mixed
     {
+        self::auth();
+
         $response = Http::withToken(session('umami_token'))
             ->get(config('umami.url').'/websites');
 
@@ -38,6 +40,8 @@ trait Websites
      */
     public static function createWebsite(array $data): mixed
     {
+        self::auth();
+
         $response = Http::withToken(session('umami_token'))
             ->post(config('umami.url').'/websites', $data);
 
@@ -51,6 +55,8 @@ trait Websites
      */
     public static function updateWebsite(string $websiteUuid, array $data): mixed
     {
+        self::auth();
+
         $response = Http::withToken(session('umami_token'))
             ->post(config('umami.url').'/websites/'.$websiteUuid, $data);
 
@@ -64,6 +70,8 @@ trait Websites
      */
     public static function deleteWebsite($websiteUuid): mixed
     {
+        self::auth();
+
         $response = Http::withToken(session('umami_token'))
             ->delete(config('umami.url').'/websites/'.$websiteUuid);
 

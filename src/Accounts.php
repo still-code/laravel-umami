@@ -12,6 +12,8 @@ trait Accounts
      */
     public static function accounts(bool $force = false): mixed
     {
+        self::auth();
+
         $response = Http::withToken(session('umami_token'))
             ->get(config('umami.url').'/accounts');
 
@@ -31,6 +33,8 @@ trait Accounts
      */
     public static function createAccount(string $username, string $password): mixed
     {
+        self::auth();
+
         $response = Http::withToken(session('umami_token'))
             ->post(config('umami.url').'/accounts', [
                 'password' => $password,
@@ -47,6 +51,8 @@ trait Accounts
      */
     public static function updateAccount(string $userId, array $data): mixed
     {
+        self::auth();
+
         $response = Http::withToken(session('umami_token'))
             ->post(config('umami.url').'/accounts/'.$userId, $data);
 
@@ -60,6 +66,8 @@ trait Accounts
      */
     public static function deleteAccount($userId): mixed
     {
+        self::auth();
+
         $response = Http::withToken(session('umami_token'))
             ->delete(config('umami.url').'/accounts/'.$userId);
 
