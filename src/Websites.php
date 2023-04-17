@@ -36,15 +36,10 @@ trait Websites
      *
      * @throws RequestException
      */
-    public static function createWebsite(string $domain, string $name, bool $share = false, bool $public = false): mixed
+    public static function createWebsite(array $data): mixed
     {
         $response = Http::withToken(session('umami_token'))
-            ->post(config('umami.url').'/websites', [
-                'domain' => $domain,
-                'name' => $name,
-                'share' => $share,
-                'public' => $public,
-            ]);
+            ->post(config('umami.url').'/websites', $data);
 
         $response->throw();
 
