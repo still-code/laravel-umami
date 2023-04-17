@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Http;
 
 class Umami
 {
+    use Websites;
+
     /**
      * authenticate the user with umami stats' server.
      *
@@ -40,12 +42,11 @@ class Umami
      * @param $part string available parts: stats, pageviews, events, metrics. defualt:
      * @param $options array|null available options: start_at, end_at, unit, tz, type
      * @param $force bool force getting the result from the server, and clear the cache
-     * @return mixed
      *
      * @throws RequestException
      * @throws \Exception
      */
-    public static function query(string $siteID, string $part = 'stats', array $options = null, bool $force = false)
+    public static function query(string $siteID, string $part = 'stats', array $options = null, bool $force = false): mixed
     {
         self::auth();
 
@@ -60,33 +61,6 @@ class Umami
         }
 
         return cache()->remember(config('umami.cache_key').'.'.$siteID.'.'.$part, config('umami.cache_ttl'), function () use ($response) {
-            return $response->json();
-        });
-    }
-
-    /**
-     * get all available websites.
-     *
-     * @param $force boolean force getting the result from the server, and clear the cache
-     * @return mixed
-     *
-     * @throws RequestException
-     * @throws \Exception
-     */
-    public static function websites(bool $force = false)
-    {
-        self::auth();
-
-        $response = Http::withToken(session('umami_token'))
-            ->get(config('umami.url').'/websites');
-
-        $response->throw();
-
-        if ($force) {
-            cache()->forget(config('umami.cache_key').'.websites');
-        }
-
-        return cache()->remember(config('umami.cache_key').'.websites', config('umami.cache_ttl'), function () use ($response) {
             return $response->json();
         });
     }
@@ -122,28 +96,10 @@ class Umami
         }
 
         $datesOptions = [
-            'start_at' => self::setDate($options['start_at']),
-            'end_at' => self::setDate($options['end_at']),
+            'start_at' => formatDate($options['start_at']),
+            'end_at' => formatDate($options['end_at']),
         ];
 
         return array_merge($defaultOptions[$part], array_merge($options, $datesOptions));
-    }
-
-    /**
-     * set the Carbon dates and convert them to milliseconds.
-     *
-     * @return string|null
-     */
-    private static function setDate($data)
-    {
-        if (is_numeric($data)) {
-            return $data;
-        }
-
-        if (is_object($data)) {
-            return $data->getTimestampMs();
-        }
-
-        return null;
     }
 }
