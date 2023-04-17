@@ -2,6 +2,14 @@
 
 All notable changes to `Laravel-umami` will be documented in this file
 
+## 4.2.1 - 2023-04-17
+
+### What's Changed
+
+- add support for Accounts management by @atmonshi in https://github.com/still-code/laravel-umami/pull/15
+
+**Full Changelog**: https://github.com/still-code/laravel-umami/compare/4.2.0...4.2.1
+
 ## 4.2.0 - 2023-04-17
 
 ### What's Changed
