@@ -16,16 +16,12 @@ class Umami
      *
      * @throws RequestException
      */
-    public static function auth()
+    public function __construct()
     {
         abort_if(
             config('umami.url') === null ||
             config('umami.username') === null ||
             config('umami.password') === null, 421, 'please make sur to set all umami config');
-
-        if (session()->has('umami_token')) {
-            return session('umami_token');
-        }
 
         $response = Http::post(config('umami.url').'/auth/login', [
             'username' => config('umami.username'),
@@ -48,8 +44,6 @@ class Umami
      */
     public static function query(string $siteID, string $part = 'stats', array $options = null, bool $force = false): mixed
     {
-        self::auth();
-
         $options = self::setOptions($part, $options);
         $response = Http::withToken(session('umami_token'))
             ->get(config('umami.url').'/websites/'.$siteID.'/'.$part, $options);
