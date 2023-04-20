@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Http;
 class Umami
 {
     use Websites;
-    use Accounts;
+    use Users;
 
     /**
      * authenticate the user with umami stats' server.
@@ -36,8 +36,8 @@ class Umami
 
     /**
      * @param $siteID string require site id
-     * @param $part string available parts: stats, pageviews, events, metrics. defualt:
-     * @param $options array|null available options: start_at, end_at, unit, tz, type
+     * @param $part string available parts: stats, active, pageviews, events, metrics. default:stats
+     * @param $options array|null available options: startAt, endAt, unit, tz, type
      * @param $force bool force getting the result from the server, and clear the cache
      *
      * @throws RequestException
@@ -45,6 +45,7 @@ class Umami
      */
     public static function query(string $siteID, string $part = 'stats', array $options = null, bool $force = false): mixed
     {
+        //http://localhost:3000/api/websites/a103b4d2-1308-4052-bc5d-604b27f06b87/pageviews?unit=hour&timezone=Asia%2FRiyadh
         self::auth();
 
         $options = self::setOptions($part, $options);
@@ -69,23 +70,58 @@ class Umami
     {
         $defaultOptions = [
             'websites' => [],
-            'stats' => [],
+            'stats' => [
+                'unit' => 'day',
+                'timezone' => config('app.timezone'),
+                'url' => null,
+                'referrer' => null,
+                'pageTitle' => null,
+                'os' => null,
+                'browser' => null,
+                'device' => null,
+                'country' => null,
+                'region' => null,
+                'city' => null,
+            ],
             'pageviews' => [
                 'unit' => 'day',
-                'tz' => config('app.timezone'),
+                'timezone' => config('app.timezone'),
+                'url' => null,
+                'referrer' => null,
+                'pageTitle' => null,
+                'os' => null,
+                'browser' => null,
+                'device' => null,
+                'country' => null,
+                'region' => null,
+                'city' => null,
             ],
             'events' => [
                 'unit' => 'day',
-                'tz' => config('app.timezone'),
+                'timezone' => config('app.timezone'),
+                'url' => null,
+                'eventName' => null,
             ],
             'metrics' => [
                 'type' => 'url',
+                'unit' => 'day',
+                'timezone' => config('app.timezone'),
+                'url' => null,
+                'referrer' => null,
+                'pageTitle' => null,
+                'os' => null,
+                'browser' => null,
+                'device' => null,
+                'country' => null,
+                'region' => null,
+                'city' => null,
             ],
+            'active' => [],
         ];
 
         $datesOptions = [
-            'start_at' => now()->subDays(7)->getTimestampMs(),
-            'end_at' => now()->getTimestampMs(),
+            'startAt' => now()->subDays(7)->getTimestampMs(),
+            'endAt' => now()->getTimestampMs(),
         ];
 
         if ($options === null) {
@@ -93,8 +129,8 @@ class Umami
         }
 
         $datesOptions = [
-            'start_at' => formatDate($options['start_at']),
-            'end_at' => formatDate($options['end_at']),
+            'startAt' => formatDate($options['startAt']),
+            'endAt' => formatDate($options['endAt']),
         ];
 
         return array_merge($defaultOptions[$part], array_merge($options, $datesOptions));
