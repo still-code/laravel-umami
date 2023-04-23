@@ -13,25 +13,29 @@ class Umami
     /**
      * authenticate the user with umami stats' server.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Session\SessionManager|\Illuminate\Session\Store|mixed|void
-     *
-     * @throws RequestException
+     * @param  array|null  $authData username and password
      */
-    public static function auth()
+    public static function auth(array $authData = null): ?string
     {
         abort_if(
             config('umami.url') === null ||
             config('umami.username') === null ||
             config('umami.password') === null, 421, 'please make sur to set all umami config');
 
-        $response = Http::post(config('umami.url').'/auth/login', [
-            'username' => config('umami.username'),
-            'password' => config('umami.password'),
-        ]);
+        if ($authData === null) {
+            $authData = [
+                'username' => config('umami.username'),
+                'password' => config('umami.password'),
+            ];
+        }
 
-        $response->throw();
+        $response = Http::post(config('umami.url').'/auth/login', $authData);
 
-        session()->put('umami_token', $response->json()['token']);
+        if ($response->ok()) {
+            return $response->json()['token'];
+        }
+
+        return null;
     }
 
     /**
@@ -43,13 +47,10 @@ class Umami
      * @throws RequestException
      * @throws \Exception
      */
-    public static function query(string $siteID, string $part = 'stats', array $options = null, bool $force = false): mixed
+    public static function query(string $siteID, string $part = 'stats', array $options = null, bool $force = false, $authData = null): mixed
     {
-        //http://localhost:3000/api/websites/a103b4d2-1308-4052-bc5d-604b27f06b87/pageviews?unit=hour&timezone=Asia%2FRiyadh
-        self::auth();
-
         $options = self::setOptions($part, $options);
-        $response = Http::withToken(session('umami_token'))
+        $response = Http::withToken(self::auth($authData))
             ->get(config('umami.url').'/websites/'.$siteID.'/'.$part, $options);
 
         $response->throw();

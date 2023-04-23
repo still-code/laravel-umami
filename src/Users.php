@@ -10,12 +10,9 @@ trait Users
     /**
      * @throws RequestException
      */
-    public static function users(bool $force = false): mixed
+    public static function users(bool $force = false, $authData = null): mixed
     {
-        self::auth();
-
-        $response = Http::withToken(session('umami_token'))
-            ->get(config('umami.url').'/users');
+        $response = Http::withToken(self::auth($authData))->get(config('umami.url').'/users');
 
         $response->throw();
 
@@ -31,11 +28,9 @@ trait Users
     /**
      * @throws RequestException
      */
-    public static function createUser(string $username, string $password): mixed
+    public static function createUser(string $username, string $password, $authData = null): mixed
     {
-        self::auth();
-
-        $response = Http::withToken(session('umami_token'))
+        $response = Http::withToken(self::auth($authData))
             ->post(config('umami.url').'/users', [
                 'password' => $password,
                 'username' => $username,
@@ -49,12 +44,9 @@ trait Users
     /**
      * @throws RequestException
      */
-    public static function updateUser(string $userId, array $data): mixed
+    public static function updateUser(string $userId, array $data, $authData = null): mixed
     {
-        self::auth();
-
-        $response = Http::withToken(session('umami_token'))
-            ->post(config('umami.url').'/users/'.$userId, $data);
+        $response = Http::withToken(self::auth($authData))->post(config('umami.url').'/users/'.$userId, $data);
 
         $response->throw();
 
@@ -64,12 +56,9 @@ trait Users
     /**
      * @throws RequestException
      */
-    public static function deleteUser($userId): mixed
+    public static function deleteUser($userId, $authData = null): mixed
     {
-        self::auth();
-
-        $response = Http::withToken(session('umami_token'))
-            ->delete(config('umami.url').'/users/'.$userId);
+        $response = Http::withToken(self::auth($authData))->delete(config('umami.url').'/users/'.$userId);
 
         $response->throw();
 

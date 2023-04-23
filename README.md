@@ -13,12 +13,13 @@
 
 API wrapper for umami website analytics. get your statistics in the laravel app.
 
-check out [Umami](https://umami.is/) own your website analytics
+check out [Umami](https://umami.is/), own your website analytics
 
 ## Features
 
 - Manage websites
-- Manage accounts
+- Manage users
+- Manage teams
 - query statistics stats, page views, events and metrics
 
 ## Installation
@@ -28,6 +29,12 @@ You can install the package via composer:
 ```bash
 composer require still-code/laravel-umami
 ```
+
+#### Umami version:
+
+- for umami v1 use v4
+- for umami v2 use v5
+
 ### Config
 to publish the configuration file:
 
@@ -75,7 +82,7 @@ required: site id from umami server
 
 required: the stats part you want to get from umami,
 
-available options : `stats, pageviews, events, metrics`
+available options : `active, stats, pageviews, events, metrics`
 
 default: `stats`
 
@@ -85,7 +92,7 @@ default: `stats`
 
 ### Options for Query Stats
 
-#### Dates (start_at,end_at)
+#### Dates (startAt,endAt)
 
 optional: Timestamp of starting and end date,
 
@@ -95,8 +102,8 @@ you can pass `carbon` object or timestamp in milliseconds
 
 ```php
 \Umami\Umami::query(siteID,'metrics',[
-    'start_at'=>today()->subDays(7),
-    'end_at'=>today(),
+    'startAt'=>today()->subDays(7),
+    'endAt'=>now(),
 ]);
 ```
 
@@ -153,18 +160,29 @@ default: url
 ```php
 \Umami\Umami::createWebsite([
     'domain'=>'domain.ltd',
-    'name'=>'account name',
-    'userId'=>'3', // account id
+    'name'=>'user name',
+]);
+```
+
+#### create a website for a diffrent user
+if you want to create a website for different user then the admin user defined in the config, you need to provide the authentication for that user.
+this is helpfully when creating a new user with a website
+
+```php
+\Umami\Umami::createWebsite([
+    'domain' => 'domain.ltd',
+    'name' => 'user name',
+],[
+    'username' => 'otherUserName',
+    'password' => 'otherPassword',
 ]);
 ```
 
 ### Update a website
 
 ```php
-\Umami\Umami::websites('d131d2ae-5d21-4a54-80ba-16719afedf7b',[
-    'domain'=>'domain.ltd',
-    'name'=>'account name',
-    'userId'=>'3', // account id
+\Umami\Umami::updateWebsites('d131d2ae-5d21-4a54-80ba-16719afedf7b',[
+    'name'=>'user name',
 ]);
 ```
 
@@ -174,33 +192,33 @@ default: url
 \Umami\Umami::deleteWebsite('d131d2ae-5d21-4a54-80ba-16719afedf7b');
 ```
 
-## Accounts
+## Users
 
-### Get All accounts
+### Get All users
 
 ```php
-\Umami\Umami::accounts();
+\Umami\Umami::users();
 ```
 
-### Create an account
+### Create a user
 
 ```php
-\Umami\Umami::createAccount('username','password');
+\Umami\Umami::createUser('username','password');
 ```
 
-### Update an account
+### Update a user
 
 ```php
-\Umami\Umami::updateAccount(1,[
+\Umami\Umami::updateUser(1,[
     'username'=>'username',
     'password'=>'password',
 ]);
 ```
 
-### Delete an account
+### Delete an user
 
 ```php
-\Umami\Umami::deleteAccounts(2);
+\Umami\Umami::deleteUser(2);
 ```
 
 ## More details
