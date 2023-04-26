@@ -19,7 +19,6 @@ check out [Umami](https://umami.is/), own your website analytics
 
 - Manage websites
 - Manage users
-- Manage teams
 - query statistics stats, page views, events and metrics
 
 ## Installation
