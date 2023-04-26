@@ -15,12 +15,9 @@ trait Websites
      * @throws RequestException
      * @throws \Exception
      */
-    public static function websites(bool $force = false): mixed
+    public static function websites(bool $force = false, $authData = null): mixed
     {
-        self::auth();
-
-        $response = Http::withToken(session('umami_token'))
-            ->get(config('umami.url').'/websites');
+        $response = Http::withToken(self::auth($authData))->get(config('umami.url').'/websites');
 
         $response->throw();
 
@@ -38,12 +35,9 @@ trait Websites
      *
      * @throws RequestException
      */
-    public static function createWebsite(array $data): mixed
+    public static function createWebsite(array $data, $authData = null): mixed
     {
-        self::auth();
-
-        $response = Http::withToken(session('umami_token'))
-            ->post(config('umami.url').'/websites', $data);
+        $response = Http::withToken(self::auth($authData))->post(config('umami.url').'/websites', $data);
 
         $response->throw();
 
@@ -53,12 +47,9 @@ trait Websites
     /**
      * @throws RequestException
      */
-    public static function updateWebsite(string $websiteUuid, array $data): mixed
+    public static function updateWebsite(string $websiteUuid, array $data, $authData = null): mixed
     {
-        self::auth();
-
-        $response = Http::withToken(session('umami_token'))
-            ->post(config('umami.url').'/websites/'.$websiteUuid, $data);
+        $response = Http::withToken(self::auth($authData))->post(config('umami.url').'/websites/'.$websiteUuid, $data);
 
         $response->throw();
 
@@ -68,12 +59,9 @@ trait Websites
     /**
      * @throws RequestException
      */
-    public static function deleteWebsite($websiteUuid): mixed
+    public static function deleteWebsite($websiteUuid, $authData = null): mixed
     {
-        self::auth();
-
-        $response = Http::withToken(session('umami_token'))
-            ->delete(config('umami.url').'/websites/'.$websiteUuid);
+        $response = Http::withToken(self::auth($authData))->delete(config('umami.url').'/websites/'.$websiteUuid);
 
         $response->throw();
 

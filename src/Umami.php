@@ -8,47 +8,49 @@ use Illuminate\Support\Facades\Http;
 class Umami
 {
     use Websites;
-    use Accounts;
+    use Users;
 
     /**
      * authenticate the user with umami stats' server.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Session\SessionManager|\Illuminate\Session\Store|mixed|void
-     *
-     * @throws RequestException
+     * @param  array|null  $authData username and password
      */
-    public static function auth()
+    public static function auth(array $authData = null): ?string
     {
         abort_if(
             config('umami.url') === null ||
             config('umami.username') === null ||
             config('umami.password') === null, 421, 'please make sur to set all umami config');
 
-        $response = Http::post(config('umami.url').'/auth/login', [
-            'username' => config('umami.username'),
-            'password' => config('umami.password'),
-        ]);
+        if ($authData === null) {
+            $authData = [
+                'username' => config('umami.username'),
+                'password' => config('umami.password'),
+            ];
+        }
 
-        $response->throw();
+        $response = Http::post(config('umami.url').'/auth/login', $authData);
 
-        session()->put('umami_token', $response->json()['token']);
+        if ($response->ok()) {
+            return $response->json()['token'];
+        }
+
+        return null;
     }
 
     /**
      * @param $siteID string require site id
-     * @param $part string available parts: stats, pageviews, events, metrics. defualt:
-     * @param $options array|null available options: start_at, end_at, unit, tz, type
+     * @param $part string available parts: stats, active, pageviews, events, metrics. default:stats
+     * @param $options array|null available options: startAt, endAt, unit, tz, type
      * @param $force bool force getting the result from the server, and clear the cache
      *
      * @throws RequestException
      * @throws \Exception
      */
-    public static function query(string $siteID, string $part = 'stats', array $options = null, bool $force = false): mixed
+    public static function query(string $siteID, string $part = 'stats', array $options = null, bool $force = false, $authData = null): mixed
     {
-        self::auth();
-
         $options = self::setOptions($part, $options);
-        $response = Http::withToken(session('umami_token'))
+        $response = Http::withToken(self::auth($authData))
             ->get(config('umami.url').'/websites/'.$siteID.'/'.$part, $options);
 
         $response->throw();
@@ -69,23 +71,58 @@ class Umami
     {
         $defaultOptions = [
             'websites' => [],
-            'stats' => [],
+            'stats' => [
+                'unit' => 'day',
+                'timezone' => config('app.timezone'),
+                'url' => null,
+                'referrer' => null,
+                'pageTitle' => null,
+                'os' => null,
+                'browser' => null,
+                'device' => null,
+                'country' => null,
+                'region' => null,
+                'city' => null,
+            ],
             'pageviews' => [
                 'unit' => 'day',
-                'tz' => config('app.timezone'),
+                'timezone' => config('app.timezone'),
+                'url' => null,
+                'referrer' => null,
+                'pageTitle' => null,
+                'os' => null,
+                'browser' => null,
+                'device' => null,
+                'country' => null,
+                'region' => null,
+                'city' => null,
             ],
             'events' => [
                 'unit' => 'day',
-                'tz' => config('app.timezone'),
+                'timezone' => config('app.timezone'),
+                'url' => null,
+                'eventName' => null,
             ],
             'metrics' => [
                 'type' => 'url',
+                'unit' => 'day',
+                'timezone' => config('app.timezone'),
+                'url' => null,
+                'referrer' => null,
+                'pageTitle' => null,
+                'os' => null,
+                'browser' => null,
+                'device' => null,
+                'country' => null,
+                'region' => null,
+                'city' => null,
             ],
+            'active' => [],
         ];
 
         $datesOptions = [
-            'start_at' => now()->subDays(7)->getTimestampMs(),
-            'end_at' => now()->getTimestampMs(),
+            'startAt' => now()->subDays(7)->getTimestampMs(),
+            'endAt' => now()->getTimestampMs(),
         ];
 
         if ($options === null) {
@@ -93,8 +130,8 @@ class Umami
         }
 
         $datesOptions = [
-            'start_at' => formatDate($options['start_at']),
-            'end_at' => formatDate($options['end_at']),
+            'startAt' => formatDate($options['startAt']),
+            'endAt' => formatDate($options['endAt']),
         ];
 
         return array_merge($defaultOptions[$part], array_merge($options, $datesOptions));
