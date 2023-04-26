@@ -2,6 +2,19 @@
 
 All notable changes to `Laravel-umami` will be documented in this file
 
+## 5.0.0 - 2023-04-26
+
+### What's Changed
+
+- Bump dependabot/fetch-metadata from 1.3.6 to 1.4.0 by @dependabot in https://github.com/still-code/laravel-umami/pull/17
+- Umami v2 by @atmonshi in https://github.com/still-code/laravel-umami/pull/18
+
+### New Contributors
+
+- @dependabot made their first contribution in https://github.com/still-code/laravel-umami/pull/17
+
+**Full Changelog**: https://github.com/still-code/laravel-umami/compare/4.2.2...5.0.0
+
 ## 4.2.2 - 2023-04-17
 
 ### What's Changed
