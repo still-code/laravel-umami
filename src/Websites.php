@@ -10,7 +10,7 @@ trait Websites
     /**
      * get all available websites.
      *
-     * @param $force boolean force getting the result from the server, and clear the cache
+     * @param  $force  boolean force getting the result from the server, and clear the cache
      *
      * @throws RequestException
      * @throws \Exception

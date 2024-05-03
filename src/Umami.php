@@ -7,15 +7,15 @@ use Illuminate\Support\Facades\Http;
 
 class Umami
 {
-    use Websites;
     use Users;
+    use Websites;
 
     /**
      * authenticate the user with umami stats' server.
      *
-     * @param  array|null  $authData username and password
+     * @param  array|null  $authData  username and password
      */
-    public static function auth(array $authData = null): ?string
+    public static function auth(?array $authData = null): ?string
     {
         abort_if(
             config('umami.url') === null ||
@@ -39,15 +39,15 @@ class Umami
     }
 
     /**
-     * @param $siteID string require site id
-     * @param $part string available parts: stats, active, pageviews, events, metrics. default:stats
-     * @param $options array|null available options: startAt, endAt, unit, tz, type
-     * @param $force bool force getting the result from the server, and clear the cache
+     * @param  $siteID  string require site id
+     * @param  $part  string available parts: stats, active, pageviews, events, metrics. default:stats
+     * @param  $options  array|null available options: startAt, endAt, unit, tz, type
+     * @param  $force  bool force getting the result from the server, and clear the cache
      *
      * @throws RequestException
      * @throws \Exception
      */
-    public static function query(string $siteID, string $part = 'stats', array $options = null, bool $force = false, $authData = null): mixed
+    public static function query(string $siteID, string $part = 'stats', ?array $options = null, bool $force = false, $authData = null): mixed
     {
         $options = self::setOptions($part, $options);
         $response = Http::withToken(self::auth($authData))
@@ -64,14 +64,15 @@ class Umami
         });
     }
 
-    public static function events(string $siteID, array $options = null, bool $force = false, $authData = null): mixed {
+    public static function events(string $siteID, ?array $options = null, bool $force = false, $authData = null): mixed
+    {
         $part = 'event-data-events';
 
         $options = self::setOptions($part, $options);
         $options['websiteId'] = $siteID;
-        
+
         $response = Http::withToken(self::auth($authData))
-            ->get(config('umami.url') . '/event-data/events', $options);
+            ->get(config('umami.url').'/event-data/events', $options);
 
         $response->throw();
 
@@ -84,14 +85,15 @@ class Umami
         });
     }
 
-    public static function event_fields(string $siteID, array $options = null, bool $force = false, $authData = null): mixed {
+    public static function event_fields(string $siteID, ?array $options = null, bool $force = false, $authData = null): mixed
+    {
         $part = 'event-data-fields';
 
         $options = self::setOptions($part, $options);
         $options['websiteId'] = $siteID;
-        
+
         $response = Http::withToken(self::auth($authData))
-            ->get(config('umami.url') . '/event-data/fields', $options);
+            ->get(config('umami.url').'/event-data/fields', $options);
 
         $response->throw();
 
