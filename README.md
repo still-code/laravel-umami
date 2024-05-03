@@ -47,17 +47,18 @@ and then add these to your `.env` file:
 UMAMI_URL=https://stats-site-com/api
 UMAMI_USERNAME=username
 UMAMI_PASSWORD="password"
+UMAMI_WEBSITE_ID=d131d2ae-5d21-4a54-80ba-16719afedf7b
 ```
 
 ## Usage
 
 ### Query Stats
 ```php
-\Umami\Umami::query(2,'metrics',[
-        'start_at'=>today()->subDays(7),
-        'end_at'=>today(),
-        'type'=>'referrer',
-    ]);
+\Umami\Umami::query('example-site-id', 'metrics', [
+    'start_at'=>today()->subDays(7),
+    'end_at'=>today(),
+    'type'=>'referrer',
+]);
 ```
 
 <br>
@@ -74,7 +75,7 @@ short usage for `PHP 8` to get default stats for the last 7 days and without cac
 required: site id from umami server
 
 ```php
-\Umami\Umami::query(siteID);
+\Umami\Umami::query('example-site-id');
 ```
 
 #### Part
@@ -86,7 +87,7 @@ available options : `active, stats, pageviews, events, metrics`
 default: `stats`
 
 ```php
-\Umami\Umami::query(siteID,'pageviews');
+\Umami\Umami::query('example-site-id','pageviews');
 ```
 
 ### Options for Query Stats
@@ -100,7 +101,7 @@ default: last 7 days
 you can pass `carbon` object or timestamp in milliseconds
 
 ```php
-\Umami\Umami::query(siteID,'metrics',[
+\Umami\Umami::query('example-site-id','metrics',[
     'startAt'=>today()->subDays(7),
     'endAt'=>now(),
 ]);
@@ -114,7 +115,7 @@ optional: Time unit, available options: `year, month, hour, day`,
 default: day
 
 ```php
-\Umami\Umami::query(siteID,'metrics',[
+\Umami\Umami::query('example-site-id','metrics',[
     'unit'=>'year',
 ]);
 ```
@@ -127,7 +128,7 @@ only available on `pageviews` and `events`
 default: config('app.timezone')
 
 ```php
-\Umami\Umami::query(siteID,'metrics',[
+\Umami\Umami::query('example-site-id','metrics',[
     'tz'=>'America/Los_Angeles',
 ]);
 ```
@@ -141,7 +142,7 @@ available options: `url, referrer, browser, os, device, country, event`,
 default: url
 
 ```php
-\Umami\Umami::query(siteID,'metrics',[
+\Umami\Umami::query('example-site-id','metrics',[
     'tz'=>'America/Los_Angeles',
 ]);
 ```
@@ -164,8 +165,8 @@ default: url
 ```
 
 #### create a website for a diffrent user
-if you want to create a website for different user then the admin user defined in the config, you need to provide the authentication for that user.
-this is helpfully when creating a new user with a website
+If you want to create a website for different user then the admin user defined in the config, you need to provide the authentication for that user.
+this is helpful when creating a new user with a website
 
 ```php
 \Umami\Umami::createWebsite([
@@ -180,7 +181,7 @@ this is helpfully when creating a new user with a website
 ### Update a website
 
 ```php
-\Umami\Umami::updateWebsites('d131d2ae-5d21-4a54-80ba-16719afedf7b',[
+\Umami\Umami::updateWebsites('example-site-id',[
     'name'=>'user name',
 ]);
 ```
@@ -188,12 +189,37 @@ this is helpfully when creating a new user with a website
 ### Delete a website
 
 ```php
-\Umami\Umami::deleteWebsite('d131d2ae-5d21-4a54-80ba-16719afedf7b');
+\Umami\Umami::deleteWebsite('example-site-id');
+```
+
+## Event data
+
+### Get website event and field key record counts within a given time range
+
+See the API documentation for details: https://umami.is/docs/api/event-data#get-/api/event-data/events
+
+```php
+\Umami\Umami::events('example-site-id', [
+    'startAt'=>today()->subDays(7),
+    'endAt'=>now(),
+    'event' => 'custom_event',
+]);
+```
+
+### Get website field key and value record counts within a given time range
+
+See the API documentation for details: https://umami.is/docs/api/event-data#get-/api/event-data/fields
+
+```php
+\Umami\Umami::event_fields('example-site-id', [
+    'startAt'=>today()->subDays(7),
+    'endAt'=>now(),
+]);
 ```
 
 ## Users
 
-### Get All users
+### Get all users
 
 ```php
 \Umami\Umami::users();
@@ -214,7 +240,7 @@ this is helpfully when creating a new user with a website
 ]);
 ```
 
-### Delete an user
+### Delete a user
 
 ```php
 \Umami\Umami::deleteUser(2);

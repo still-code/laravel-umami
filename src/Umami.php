@@ -20,7 +20,7 @@ class Umami
         abort_if(
             config('umami.url') === null ||
             config('umami.username') === null ||
-            config('umami.password') === null, 421, 'please make sur to set all umami config');
+            config('umami.password') === null, 421, 'Please make sure to set all the required Umami configuration values.');
 
         if ($authData === null) {
             $authData = [
@@ -52,6 +52,46 @@ class Umami
         $options = self::setOptions($part, $options);
         $response = Http::withToken(self::auth($authData))
             ->get(config('umami.url').'/websites/'.$siteID.'/'.$part, $options);
+
+        $response->throw();
+
+        if ($force) {
+            cache()->forget(config('umami.cache_key').'.'.$siteID.'.'.$part);
+        }
+
+        return cache()->remember(config('umami.cache_key').'.'.$siteID.'.'.$part, config('umami.cache_ttl'), function () use ($response) {
+            return $response->json();
+        });
+    }
+
+    public static function events(string $siteID, array $options = null, bool $force = false, $authData = null): mixed {
+        $part = 'event-data-events';
+
+        $options = self::setOptions($part, $options);
+        $options['websiteId'] = $siteID;
+        
+        $response = Http::withToken(self::auth($authData))
+            ->get(config('umami.url') . '/event-data/events', $options);
+
+        $response->throw();
+
+        if ($force) {
+            cache()->forget(config('umami.cache_key').'.'.$siteID.'.'.$part);
+        }
+
+        return cache()->remember(config('umami.cache_key').'.'.$siteID.'.'.$part, config('umami.cache_ttl'), function () use ($response) {
+            return $response->json();
+        });
+    }
+
+    public static function event_fields(string $siteID, array $options = null, bool $force = false, $authData = null): mixed {
+        $part = 'event-data-fields';
+
+        $options = self::setOptions($part, $options);
+        $options['websiteId'] = $siteID;
+        
+        $response = Http::withToken(self::auth($authData))
+            ->get(config('umami.url') . '/event-data/fields', $options);
 
         $response->throw();
 
@@ -118,6 +158,12 @@ class Umami
                 'city' => null,
             ],
             'active' => [],
+            'event-data-events' => [
+                'event' => null,
+            ],
+            'event-data-fields' => [
+                //
+            ],
         ];
 
         $datesOptions = [
