@@ -2,6 +2,28 @@
 
 All notable changes to `Laravel-umami` will be documented in this file
 
+## 5.0.1 - 2024-05-03
+
+### What's Changed
+
+* Bump dependabot/fetch-metadata from 1.4.0 to 1.5.1 by @dependabot in https://github.com/still-code/laravel-umami/pull/19
+* Bump aglipanci/laravel-pint-action from 2.2.0 to 2.3.0 by @dependabot in https://github.com/still-code/laravel-umami/pull/20
+* Bump dependabot/fetch-metadata from 1.5.1 to 1.6.0 by @dependabot in https://github.com/still-code/laravel-umami/pull/21
+* Bump stefanzweifel/git-auto-commit-action from 4 to 5 by @dependabot in https://github.com/still-code/laravel-umami/pull/23
+* Bump actions/checkout from 3 to 4 by @dependabot in https://github.com/still-code/laravel-umami/pull/22
+* Bump aglipanci/laravel-pint-action from 2.3.0 to 2.3.1 by @dependabot in https://github.com/still-code/laravel-umami/pull/24
+* Bump ramsey/composer-install from 2 to 3 by @dependabot in https://github.com/still-code/laravel-umami/pull/25
+* Bump dependabot/fetch-metadata from 1.6.0 to 2.0.0 by @dependabot in https://github.com/still-code/laravel-umami/pull/26
+* Bump aglipanci/laravel-pint-action from 2.3.1 to 2.4 by @dependabot in https://github.com/still-code/laravel-umami/pull/27
+* Bump dependabot/fetch-metadata from 2.0.0 to 2.1.0 by @dependabot in https://github.com/still-code/laravel-umami/pull/28
+* Added event-data/events + event-data/fields by @marcfowler in https://github.com/still-code/laravel-umami/pull/29
+
+### New Contributors
+
+* @marcfowler made their first contribution in https://github.com/still-code/laravel-umami/pull/29
+
+**Full Changelog**: https://github.com/still-code/laravel-umami/compare/5.0.0...5.0.1
+
 ## 5.0.0 - 2023-04-26
 
 ### What's Changed
