@@ -178,8 +178,8 @@ class Umami
         }
 
         $datesOptions = [
-            'startAt' => formatDate($options['startAt']),
-            'endAt' => formatDate($options['endAt']),
+            'startAt' => formatDate($options['start_at']),
+            'endAt' => formatDate($options['end_at']),
         ];
 
         return array_merge($defaultOptions[$part], array_merge($options, $datesOptions));
