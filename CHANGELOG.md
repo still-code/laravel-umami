@@ -2,6 +2,15 @@
 
 All notable changes to `Laravel-umami` will be documented in this file
 
+## 5.0.2 - 2024-06-18
+
+### What's Changed
+
+* add support to laravel 11 by @atmonshi in https://github.com/still-code/laravel-umami/pull/31
+* fix date params by @atmonshi in https://github.com/still-code/laravel-umami/pull/32
+
+**Full Changelog**: https://github.com/still-code/laravel-umami/compare/5.0.1...5.0.2
+
 ## 5.0.1 - 2024-05-03
 
 ### What's Changed
