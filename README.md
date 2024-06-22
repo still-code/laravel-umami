@@ -92,7 +92,7 @@ default: `stats`
 
 ### Options for Query Stats
 
-#### Dates (startAt,endAt)
+#### Dates (start_at,end_at)
 
 optional: Timestamp of starting and end date,
 
@@ -102,8 +102,8 @@ you can pass `carbon` object or timestamp in milliseconds
 
 ```php
 \Umami\Umami::query('example-site-id','metrics',[
-    'startAt'=>today()->subDays(7),
-    'endAt'=>now(),
+    'start_at'=>today()->subDays(7),
+    'end_at'=>now(),
 ]);
 ```
 
@@ -200,8 +200,8 @@ See the API documentation for details: https://umami.is/docs/api/event-data#get-
 
 ```php
 \Umami\Umami::events('example-site-id', [
-    'startAt'=>today()->subDays(7),
-    'endAt'=>now(),
+    'start_at'=>today()->subDays(7),
+    'end_at'=>now(),
     'event' => 'custom_event',
 ]);
 ```
@@ -212,8 +212,8 @@ See the API documentation for details: https://umami.is/docs/api/event-data#get-
 
 ```php
 \Umami\Umami::event_fields('example-site-id', [
-    'startAt'=>today()->subDays(7),
-    'endAt'=>now(),
+    'start_at'=>today()->subDays(7),
+    'end_at'=>now(),
 ]);
 ```
 
