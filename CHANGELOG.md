@@ -2,6 +2,22 @@
 
 All notable changes to `Laravel-umami` will be documented in this file
 
+## 5.0.3 - 2025-05-19
+
+### What's Changed
+
+* Bump dependabot/fetch-metadata from 2.1.0 to 2.2.0 by @dependabot in https://github.com/still-code/laravel-umami/pull/33
+* Bump dependabot/fetch-metadata from 2.2.0 to 2.3.0 by @dependabot in https://github.com/still-code/laravel-umami/pull/36
+* Bump aglipanci/laravel-pint-action from 2.4 to 2.5 by @dependabot in https://github.com/still-code/laravel-umami/pull/37
+* Bump dependabot/fetch-metadata from 2.3.0 to 2.4.0 by @dependabot in https://github.com/still-code/laravel-umami/pull/38
+* Add laravel 12 support by @mohammedtohamym in https://github.com/still-code/laravel-umami/pull/39
+
+### New Contributors
+
+* @mohammedtohamym made their first contribution in https://github.com/still-code/laravel-umami/pull/39
+
+**Full Changelog**: https://github.com/still-code/laravel-umami/compare/5.0.2...5.0.3
+
 ## 5.0.2 - 2024-06-18
 
 ### What's Changed
